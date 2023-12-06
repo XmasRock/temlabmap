@@ -12,17 +12,17 @@ const slugify = (text) => {
     .replace(/\-$/g, '');         // Remove trailing -
 }
 
-function sendMessage(in_id, in_slug_id, in_slugs) {
-  const message = ""+in_id+"/"+in_slugs[in_slug_id];
+function sendMessage(in_id, in_slug_id) {
+  const message = ""+in_id+"/"+slugs[in_slug_id];
   const targetOrigin = 'https://temlab.fr';
   parent.postMessage(message, targetOrigin);
   }
 
-function afficherInstallations(in_installations, in_map, in_slugs){
+function afficherInstallations(in_installations){
   slug_id = 0;
   in_installations.forEach(element => {
-    in_slugs.push(slugify(element.titre));
-    marker = L.marker(element.coord).bindPopup('<table width="300px" height="150px"><tr><td align="center" valign="middle"  style="font-size: 14px"><img src="'+element.image+'" height="120px" width="120px"/><br/><b>'+element.societe+'</b></td><td  align="center" valign="middle" style="font-size: 14px"><b><a href="" onclick="sendMessage('+element.ID+','+slug_id+',in_slugs);">'+element.titre+'</a></b><br/><br/>'+element.adresse+'<br/><br/><p>'+element.resume+'</p></td></tr></table>').addTo(in_map);
+    slugs.push(slugify(element.titre));
+    marker = L.marker(element.coord).bindPopup('<table width="300px" height="150px"><tr><td align="center" valign="middle"  style="font-size: 14px"><img src="'+element.image+'" height="120px" width="120px"/><br/><b>'+element.societe+'</b></td><td  align="center" valign="middle" style="font-size: 14px"><b><a href="" onclick="sendMessage('+element.ID+','+slug_id+');">'+element.titre+'</a></b><br/><br/>'+element.adresse+'<br/><br/><p>'+element.resume+'</p></td></tr></table>').addTo(map);
     slug_id++;
   });
 }
