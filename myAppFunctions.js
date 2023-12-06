@@ -12,12 +12,14 @@ const slugify = (text) => {
     .replace(/\-$/g, '');         // Remove trailing -
 }
 
-function getParentLocationHref(in_id, in_titre){
-  return "window.parent.location.href='https://temlab.fr/installationdetail/"+in_id+"/"+slugify(in_titre)+"';";
-}
+function sendMessage(in_id, in_slug) {
+  const message = ""+in_id+"/"+in_slug;
+  const targetOrigin = 'https://temlab.fr';
+  parent.postMessage(message, targetOrigin);
+  }
 
 function afficherInstallations(in_installations, in_map){
   in_installations.forEach(element => {
-    marker = L.marker(element.coord).bindPopup('<table width="300px" height="150px"><tr><td align="center" valign="middle"  style="font-size: 14px"><img src="'+element.image+'" height="120px" width="120px"/><br/><b>'+element.societe+'</b></td><td  align="center" valign="middle" style="font-size: 14px"><b><a href="" onclick="'+getParentLocationHref(element.ID,element.titre)+'">'+element.titre+'</a></b><br/><br/>'+element.adresse+'<br/><br/><p>'+element.resume+'</p></td></tr></table>').addTo(in_map);
+    marker = L.marker(element.coord).bindPopup('<table width="300px" height="150px"><tr><td align="center" valign="middle"  style="font-size: 14px"><img src="'+element.image+'" height="120px" width="120px"/><br/><b>'+element.societe+'</b></td><td  align="center" valign="middle" style="font-size: 14px"><b><a href="" onclick="sendMessage('+element.ID+','+slugify(element.titre)+');">'+element.titre+'</a></b><br/><br/>'+element.adresse+'<br/><br/><p>'+element.resume+'</p></td></tr></table>').addTo(in_map);
   });
 }
