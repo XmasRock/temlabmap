@@ -16,6 +16,6 @@ const slugify = (text) => {
 function afficherInstallations(in_installations, in_map){
 
   in_installations.forEach(element => {
-    marker = L.marker(element.coord).bindPopup('<table width="300px" height="150px"><tr><td align="center" valign="middle"  style="font-size: 14px"><img src="'+element.image+'" height="120px" width="120px"/><br/><b>'+element.societe+'</b></td><td  align="center" valign="middle" style="font-size: 14px"><b><a href="https://temlab.fr/installationdetail/'+element.ID+'/'+slugify(element.titre)+'">'+element.titre+'</a></b><br/><br/>'+element.adresse+'<br/><br/><p>'+element.resume+'</p></td></tr></table>').addTo(in_map);
+    marker = L.marker(element.coord).bindPopup('<table width="300px" height="150px"><tr><td align="center" valign="middle"  style="font-size: 14px"><img src="'+element.image+'" height="120px" width="120px"/><br/><b>'+element.societe+'</b></td><td  align="center" valign="middle" style="font-size: 14px"><b><a href="" onclick="window.parent.href=https://temlab.fr/installationdetail/'+element.ID+'/'+slugify(element.titre)+'">'+element.titre+'</a></b><br/><br/>'+element.adresse+'<br/><br/><p>'+element.resume+'</p></td></tr></table>').addTo(in_map);
   });
 }
